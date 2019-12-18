@@ -88,6 +88,9 @@ const App: React.FC = () => {
         listings.findIndex(L => L.id === lastId)
       )
     : listings;
+  const oldListings = lastId
+    ? listings.slice(listings.findIndex(L => L.id === lastId))
+    : [];
   return (
     <div className="App">
       <Container w="650px">
@@ -105,6 +108,20 @@ const App: React.FC = () => {
             {interval && "Minutes"}
             <h2>New Listings ({newListings.length})</h2>
             {newListings.map(listing => (
+              <div key={listing.id}>
+                <strong>
+                  <a
+                    href={`https://www.kijiji.ca${listing.link}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <span className="price">{format(listing.price)}</span>
+                    <span className="title">{listing.title}</span>
+                  </a>
+                </strong>
+              </div>
+            ))}
+            {oldListings.map(listing => (
               <div key={listing.id}>
                 <a
                   href={`https://www.kijiji.ca${listing.link}`}

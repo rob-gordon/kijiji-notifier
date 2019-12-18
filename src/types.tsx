@@ -4,10 +4,12 @@ export type TListing = {
   description: string;
   image?: string;
   price: number;
+  link?: string;
 };
 
 declare global {
   interface Window {
-    setLastId: any;
+    listings: any;
+    setListings: any;
   }
 }
